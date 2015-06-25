@@ -5,7 +5,7 @@ import Image
 import ImageDraw
 import ImageFont
 import os
-from rgbmatrix import Adafruit_RGBmatrix
+from lib.drivers import Adafruit_RGBmatrix
 import time
 
 # Config
