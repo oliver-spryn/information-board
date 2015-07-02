@@ -25,7 +25,28 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="lib\containers\LinkedList.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\containers\Node.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\containers\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="lib\drivers\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\events\Event.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\events\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\foundation\Queue.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lib\foundation\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="lib\parse\config.py" />
@@ -49,8 +70,11 @@
   <ItemGroup>
     <Folder Include="assets\fonts\" />
     <Folder Include="lib\" />
+    <Folder Include="lib\containers\" />
     <Folder Include="lib\drivers\" />
     <Folder Include="assets\" />
+    <Folder Include="lib\events\" />
+    <Folder Include="lib\foundation\" />
     <Folder Include="lib\parse\" />
   </ItemGroup>
   <ItemGroup>
