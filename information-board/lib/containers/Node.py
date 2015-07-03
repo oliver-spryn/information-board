@@ -7,8 +7,11 @@ class Node(object):
     and contains all of the elements which are necessary to hold
     data, and point to the previous and next Node objects.
 
+    Args:
+        data: The data to hold inside of this Node.
+
     Attributes:
-        data: The data being held by this node.
+        data: The data being held by this Node.
         next: The next Node in the doubly-linked list. Defaults to
             None, if there isn't a next Node.
         previous: The previous Node in the doubly-linked list.
