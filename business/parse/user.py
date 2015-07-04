@@ -12,10 +12,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from parse_rest.core import ResourceRequestLoginRequired, ParseError
-from parse_rest.connection import API_ROOT
-from parse_rest.datatypes import ParseResource, ParseType
-from parse_rest.query import QueryManager
+from business.parse.core import ResourceRequestLoginRequired, ParseError
+from business.parse.connection import API_ROOT
+from business.parse.datatypes import ParseResource, ParseType
+from business.parse.query import QueryManager
 
 
 def login_required(func):
@@ -118,7 +118,7 @@ class User(ParseResource):
 
     def __repr__(self):
         return '<User:%s (Id %s)>' % (getattr(self, 'username', None), self.objectId)
-    
+
     def removeRelation(self, key, className, objectsId):
         self.manageRelation('RemoveRelation', key, className, objectsId)
 

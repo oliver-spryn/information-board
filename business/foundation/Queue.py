@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from containers.LinkedList import LinkedList
+from business.containers.LinkedList import LinkedList
 
 class Queue(object):
     """The main display Queue.

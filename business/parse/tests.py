@@ -14,12 +14,12 @@ import datetime
 import six
 from itertools import chain
 
-from parse_rest.core import ResourceRequestNotFound
-from parse_rest.connection import register, ParseBatcher
-from parse_rest.datatypes import GeoPoint, Object, Function, Pointer
-from parse_rest.user import User
-from parse_rest import query
-from parse_rest.installation import Push
+from business.parse.core import ResourceRequestNotFound
+from business.parse.connection import register, ParseBatcher
+from business.parse.datatypes import GeoPoint, Object, Function, Pointer
+from business.parse.user import User
+from business.parse import query
+from business.parse.installation import Push
 
 try:
     import settings_local
@@ -95,7 +95,7 @@ class TestObject(unittest.TestCase):
             ParseBatcher().batch_delete(GameScore.Query.filter(score=game_score))
         if collected_item_type:
             ParseBatcher().batch_delete(CollectedItem.Query.filter(type=collected_item_type))
-        
+
     def testCanInitialize(self):
         self.assertEqual(self.score.score, 1337, 'Could not set score')
 
@@ -143,7 +143,7 @@ class TestObject(unittest.TestCase):
         self.score.increment('score')
         self.assertTrue(GameScore.Query.filter(score=previous_score + 1).exists(),
                      'Failed to increment score on backend')
-                     
+
     def testCanRemoveField(self):
         self.score.save()
         self.score.remove('score')
@@ -537,7 +537,7 @@ class TestUser(unittest.TestCase):
             getattr(settings_local, 'REST_API_KEY'),
             master_key=getattr(settings_local, 'MASTER_KEY')
         )
-        
+
         self.assertIsNotNone(current_user)
         self.assertEqual(current_user.sessionToken, user.sessionToken)
         self.assertEqual(current_user.username, user.username)

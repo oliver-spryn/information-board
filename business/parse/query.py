@@ -70,7 +70,7 @@ class Queryset(object):
 
     @staticmethod
     def convert_to_parse(value):
-        from parse_rest.datatypes import ParseType
+        from business.parse.datatypes import ParseType
         return ParseType.convert_to_parse(value, as_pointer=True)
 
     @classmethod

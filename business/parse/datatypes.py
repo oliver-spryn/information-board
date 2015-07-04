@@ -15,11 +15,11 @@ from __future__ import unicode_literals
 import base64
 import datetime
 import mimetypes
-import six
+from business.six import six
 
-from parse_rest.connection import API_ROOT, ParseBase
-from parse_rest.query import QueryManager
-from parse_rest.core import ParseError
+from business.parse.connection import API_ROOT, ParseBase
+from business.parse.query import QueryManager
+from business.parse.core import ParseError
 
 
 def complex_type(name=None):
@@ -455,7 +455,7 @@ class Object(six.with_metaclass(ObjectMetaclass, ParseResource)):
             }
         self.__class__.PUT(self._absolute_url, **payload)
         self.__dict__[key] += amount
-        
+
     def remove(self, key):
         """
         Clear a column value in the object. Note that this happens immediately:

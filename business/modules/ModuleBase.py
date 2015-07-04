@@ -1,7 +1,11 @@
 #!/usr/bin/python
 
 from exceptions import NotImplementedError
+from models.parse.API import API
+
+import json
 import time
+import urllib2
 
 class ModuleBase(object):
     def __init__(self):
@@ -24,5 +28,32 @@ class ModuleBase(object):
         """
         raise NotImplementedError("ModuleBase.draw() must be overridden")
 
-    def fetchAPIKey(self):
-        pass
+    def fetchAPIKey(self, name):
+        return API.Query.get(service = name)
+
+    def fetchURL(self, url):
+        """Fetch and parse and API call.
+
+        Makes a call to an API and attempts to parse a JSON response
+        into a generic Python dict.
+
+        Args:
+            url: The URL to the API.
+
+        Returns:
+            Either a dict, with the parsed results of the JSON response,
+            or a string, if the response was not JSON.
+        """
+        contents = urllib2.urlopen(url).read()
+
+        # Is this JSON?
+        try:
+            return json.loads(contents) # Yay
+        except ValueError, e:
+            pass                    # Nay
+
+        # Is this XML?
+            # Too bad!
+
+        # Just return whatever text was given
+        return contents

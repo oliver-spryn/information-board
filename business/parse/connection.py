@@ -11,13 +11,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from six.moves.urllib.request import Request, urlopen
-from six.moves.urllib.error import HTTPError
-from six.moves.urllib.parse import urlencode
+from business.six.six.moves.urllib.request import Request, urlopen
+from business.six.six.moves.urllib.error import HTTPError
+from business.six.six.moves.urllib.parse import urlencode
 
 import json
 
-from parse_rest import core
+from business.parse import core
 
 API_ROOT = 'https://api.parse.com/1'
 ACCESS_KEYS = {}
@@ -106,7 +106,7 @@ class ParseBase(object):
         headers.update(extra_headers or {})
 
         request = Request(url, data, headers)
-        
+
         if ACCESS_KEYS.get('session_token'):
             request.add_header('X-Parse-Session-Token', ACCESS_KEYS.get('session_token'))
         elif master_key:

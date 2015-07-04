@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+from business.containers.Node import Node
+
 class LinkedList(object):
     """A doubly-linked list.
 

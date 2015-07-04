@@ -12,9 +12,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from parse_rest.connection import API_ROOT
-from parse_rest.datatypes import Object
-from parse_rest.query import QueryManager
+from business.parse.connection import API_ROOT
+from business.parse.datatypes import Object
+from business.parse.query import QueryManager
 
 
 class Role(Object):
