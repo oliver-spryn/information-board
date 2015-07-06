@@ -29,10 +29,11 @@ class ModuleBase(object):
         raise NotImplementedError("ModuleBase.draw() must be overridden")
 
     def fetchAPIKey(self, name):
-        return API.Query.get(service = name)
+        row = API.Query.get(service = name)
+        return row.key
 
     def fetchURL(self, url):
-        """Fetch and parse and API call.
+        """Fetch and parse an API call.
 
         Makes a call to an API and attempts to parse a JSON response
         into a generic Python dict.
@@ -50,7 +51,7 @@ class ModuleBase(object):
         try:
             return json.loads(contents) # Yay
         except ValueError, e:
-            pass                    # Nay
+            pass                        # Nay
 
         # Is this XML?
             # Too bad!
