@@ -33,10 +33,10 @@ class Forecast(ModuleBase):
         data.public_ip = jaddr["ip"]
 
         # Discover the LAN IP address
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        data.lan_ip = s.getsockname()[0]
-        s.close()
+#        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+ #       s.connect(("8.8.8.8", 80))
+  #      data.lan_ip = s.getsockname()[0]
+   #     s.close()
 
         # Discover the latitude and longitude
         geo = urllib2.urlopen("http://freegeoip.net/json/{0}".format(data.public_ip)).read()
