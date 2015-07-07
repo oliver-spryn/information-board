@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-class GeoNetModel(object):
+from models.ModelBase import ModelBase
+
+class GeoNetModel(ModelBase):
     """Holds network and geolocation information.
 
     This model is designed to hold the user's network information,
