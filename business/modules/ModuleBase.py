@@ -9,26 +9,62 @@ import time
 import urllib2
 
 class ModuleBase(object):
+    """The base class for all modules.
+
+    This class defines some basic functionality which is common to
+    all modules in this project. It also holds and processes some
+    information which each module may needs to access, as well as
+    define an interface which the implementation of each module
+    will require.
+
+    Attributes:
+        data: A model containing several pieces of information which
+            is common to all modules.
+
+    Args:
+        duration: The amount of time for which this module will be on
+            display.
+        start_time: The time at which the module will start displaying
+            next.
+        end_time: The time at which the module will stop displaying
+            next.
+    """
+
     def __init__(self, duration, start_time, end_time):
         self.data = ModuleDataModel()
         self.data.duration = duration
         self.data.start_time = start_time
         self.data.end_time = end_time
 
-    def draw(self):
-        """Draw to the screen.
+    def draw_32(self):
+        """Draw to a 32x32 matrix.
 
         This function is called on each draw request, but is
         implemented as a stub in this base class. If a child
         class does not override this function, and the application
-        calls draw(), and excpetion will be thrown.
+        calls this function, an excpetion will be thrown.
 
         Raises:
             NotImplementedError: An error caused by this function
                 stub, since it needs overridden in order to
                 implement the proper functionality.
         """
-        raise NotImplementedError("ModuleBase.draw() must be overridden")
+        raise NotImplementedError("ModuleBase.draw_32() must be overridden")
+
+    def draw_64(self):
+        """Draw to a 64x32 matrix.
+
+        This function is called on each draw request, but is
+        implemented as a stub in this base class. If a child
+        class does not override this function, and the application
+        calls this function, an excpetion will be thrown.
+
+        Raises:
+            NotImplementedError: An error caused by this function
+                stub, since it needs overridden in order to
+                implement the proper functionality.
+        """
+        raise NotImplementedError("ModuleBase.draw_64() must be overridden")
 
     def fetch_api_key(self, name):
         row = API.Query.get(service = name)
