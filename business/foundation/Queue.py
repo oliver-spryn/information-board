@@ -12,16 +12,34 @@ class Queue(object):
     of displayable items has been sent to this class, items
     will be chosen at random.
 
-    Args:
-        registry: A class containing a registry of objects
-            which can be displayed on screen.
-        time: The amount of time to display a single item
-            on screen.
-
     Attributes:
+        duration: The amount of time to display a single item
+            on screen.
         list: The LinkedList object which will act as the main
             display queue.
+
+    Args:
+        duration: The amount of time to display a single item
+            on screen.
+        registry: A class containing a registry of objects
+            which can be displayed on screen.
     """
 
-    def __init__(self):
+    def __init__(self, duration):
         self.list = LinkedList()
+        self.duration = duration
+
+    def register(self, module):
+        """Register a class as part of the Queue.
+
+        This method will register the names of classes (not
+        instances of a class) as part of the Queue for display.
+        """
+
+        self.list.append(module())
+
+    def start(self):
+        """Start running the Queue and the modules inside of it.
+        """
+        
+        pass

@@ -12,7 +12,7 @@ class ModuleCollection(ModuleBase):
     of time given by the main Queue.
 
     Attributes:
-        registry: A list of modules which will be displayed as
+        instances: A list of modules which will be displayed as
             part of this collection.
         unit_duration: The amount of time for which an individual
             module will be on display.
@@ -28,7 +28,7 @@ class ModuleCollection(ModuleBase):
 
     def __init__(self, duration, start_time, end_time):
         super(ModuleCollection, self).__init__(duration, start_time, end_time)
-        self.registry = []
+        self.instances = []
         self.unit_duration = duration
 
     def draw_32(self):
@@ -37,12 +37,20 @@ class ModuleCollection(ModuleBase):
     def draw_64(self):
         pass
 
+    def module_next(self):
+        """Propigates the event call to the first registered module.
+        """
+
+        if len(self.instances) > 0:
+            self.instances[0].module_next()
+
     def register(self, module):
         """Register a class as part of the collection.
 
         This method will register the names of classes (not
         instances of a class) as part of the module collection
-        for display."""
+        for display.
+        """
 
-        self.registry.append(module)
+        self.registry.append(module())
         self.unit_duration = self.data.duration / len(self.registry)
