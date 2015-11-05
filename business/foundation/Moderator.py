@@ -2,7 +2,7 @@
 
 from business.containers.LinkedList import LinkedList
 
-class Queue(object):
+class Moderator(object):
     """The main display Queue.
 
     This class manages the Queue of objects which will render
@@ -34,6 +34,9 @@ class Queue(object):
 
         This method will register the names of classes (not
         instances of a class) as part of the Queue for display.
+
+        Args:
+            module: The module to add to the queue.
         """
 
         self.list.append(module())
@@ -41,5 +44,5 @@ class Queue(object):
     def start(self):
         """Start running the Queue and the modules inside of it.
         """
-        
+
         pass
