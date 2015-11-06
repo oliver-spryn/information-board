@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
-import os
+from business.factories.FirebaseFactory import FirebaseFactory
 
-dir = next(os.walk("./plugins"))[1]
-
-for name in dir:
-	print(name)
+fbf = FirebaseFactory("https://information-board.firebaseio.com/")
+print(fbf.get("/plugins", None))
