@@ -34,7 +34,7 @@ class FirebaseFactory:
         secret = os.environ.get("IB_FIREBASE_SECRET")
 
         if secret is None:
-            raise FirebaseSecretMissingException("The environment variable IB_FIREBASE_SECRET cannot be found.")
+            raise FirebaseSecretMissingException("The environment variable IB_FIREBASE_SECRET cannot be found")
 
     # Create the authentication
         # Per: https://github.com/ozgur/python-firebase/blob/master/firebase/firebase.py#L172

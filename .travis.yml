@@ -1,0 +1,16 @@
+# Language
+language: python
+python:
+  - "3.5"
+
+# Dependencies
+install:
+  - pip install requests
+  - pip install python-firebase
+
+# Unit testing
+script: nosetests
+
+# Slack integration
+notifications:
+  slack: spryn:LYnQyxr4InDhQAOlFpCM29Lh
