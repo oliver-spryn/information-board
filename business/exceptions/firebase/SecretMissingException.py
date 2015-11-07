@@ -2,7 +2,7 @@
 
 from business.exceptions.Exception import Exception
 
-class FirebaseSecretMissingException(Exception):
+class SecretMissingException(Exception):
     """No Firebase secret can be found.
 
     Thrown whenever the application cannot find an
@@ -14,4 +14,4 @@ class FirebaseSecretMissingException(Exception):
     """
 
     def __init__(self, msg):
-        super(FirebaseSecretMissingException, self).__init__(msg)
+        super(SecretMissingException, self).__init__(msg)

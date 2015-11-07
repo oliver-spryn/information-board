@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 from business.factories.FirebaseFactory import FirebaseFactory
+from business.factories.LogentryFactory import LogentryFactory
 
-fbf = FirebaseFactory("https://information-board.firebaseio.com/")
-print(fbf.get("/plugins", None))
+fbf = FirebaseFactory()
+le = LogentryFactory(fbf)
+le.debug("HI")

@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-from business.exceptions.FirebaseSecretMissingException import FirebaseSecretMissingException
-from business.exceptions.FirebaseAuthInvalidException import FirebaseAuthInvalidException
+from business.exceptions.firebase.AuthInvalidException import AuthInvalidException
+from business.exceptions.firebase.SecretMissingException import SecretMissingException
+from business.exceptions.firebase.URLMissingException import URLMissingException
 
 from firebase import firebase
 
@@ -16,12 +17,15 @@ class FirebaseFactory:
     releasing Firebase Python interface for use in the rest
     of the program.
 
-    Args:
-        URL: The URL to the Firebase dataset.
-
     Raises:
-        FirebaseSecretMissingException: Thrown whenever the
+        AuthInvalidException: Thrown whenever the API key or
+            the connection URL is invalid and the application
+            is not granted access to the Firebase data set.
+        SecretMissingException: Thrown whenever the
             IB_FIREBASE_SECRET environment variable is not
+            set.
+        URLMissingException: Thrown whenever the
+            IB_FIREBASE_URL environment variable is not
             set.
 
     Returns:
@@ -29,12 +33,16 @@ class FirebaseFactory:
         applied.
     """
 
-    def __new__(cls, URL):
-    # Get the Firebase API key
+    def __new__(cls):
+    # Get the Firebase URL and API key
         secret = os.environ.get("IB_FIREBASE_SECRET")
+        url = os.environ.get("IB_FIREBASE_URL")
 
         if secret is None:
-            raise FirebaseSecretMissingException("The environment variable IB_FIREBASE_SECRET cannot be found")
+            raise SecretMissingException("The environment variable IB_FIREBASE_SECRET cannot be found.")
+
+        if url is None:
+            raise URLMissingException("The environment variable IB_FIREBASE_URL cannot be found.")
 
     # Create the authentication
         # Per: https://github.com/ozgur/python-firebase/blob/master/firebase/firebase.py#L172
@@ -42,9 +50,9 @@ class FirebaseFactory:
         auth = firebase.FirebaseAuthentication(secret, None)
 
     # Set up Firebase
-        fb = firebase.FirebaseApplication(URL, auth)
+        fb = firebase.FirebaseApplication(url, auth)
 
         if fb.get("/", None) is None:
-            raise FirebaseAuthInvalidException("The API key used to connect to the Firebase API is invalid.")
+            raise AuthInvalidException("The URL or API key used to connect to the Firebase API is invalid.")
 
         return fb

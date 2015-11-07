@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-class Exception:
+class Exception(BaseException):
     """The base exception class.
 
     All exceptions which will be thrown by this project

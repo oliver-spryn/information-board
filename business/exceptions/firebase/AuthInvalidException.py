@@ -2,7 +2,7 @@
 
 from business.exceptions.Exception import Exception
 
-class FirebaseAuthInvalidException(Exception):
+class AuthInvalidException(Exception):
     """Firebase authentication is invalid.
 
     Thrown whenever the API key used to log into the
@@ -13,4 +13,4 @@ class FirebaseAuthInvalidException(Exception):
     """
 
     def __init__(self, msg):
-        super(FirebaseAuthInvalidException, self).__init__(msg)
+        super(AuthInvalidException, self).__init__(msg)
