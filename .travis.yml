@@ -7,6 +7,7 @@ python:
 install:
   - pip install requests
   - pip install python-firebase
+  - pip install logentries
 
 # Unit testing
 script: nosetests
