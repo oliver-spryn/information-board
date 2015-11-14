@@ -5,6 +5,7 @@ python:
 
 # Compile the matrix driver
 before_install:
+  - sudo apt-get install python-dev python-imaging
   - cd business/drivers
   - wget https://github.com/adafruit/rpi-rgb-led-matrix/archive/master.zip
   - unzip master.zip
