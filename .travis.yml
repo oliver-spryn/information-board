@@ -3,6 +3,18 @@ language: python
 python:
   - "3.5"
 
+# Compile the matrix driver
+before_install:
+  - cd business/drivers
+  - wget https://github.com/adafruit/rpi-rgb-led-matrix/archive/master.zip
+  - unzip master.zip
+  - cd rpi-rgb-led-matrix-master/
+  - make
+  - mv rgbmatrix.so ../rgbmatrix.so
+  - rm -rf rpi-rgb-led-matrix-master/
+  - rm master.zip
+  - cd ../../
+
 # Dependencies
 install:
   - pip install requests
