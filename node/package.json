@@ -1,0 +1,33 @@
+{
+  "name": "information-board",
+  "version": "1.0.0",
+  "description": "A REST API for controlling the on-screen display of the LED matrix",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'No tests'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliver-spryn/information-board.git"
+  },
+  "keywords": [
+    "LED",
+    "LED Matrix",
+    "REST",
+    "API",
+    "web",
+    "IoT",
+    "Raspberry Pi"
+  ],
+  "author": "Oliver Spryn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oliver-spryn/information-board/issues"
+  },
+  "homepage": "https://github.com/oliver-spryn/information-board#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jsonfile": "^2.4.0"
+  }
+}
