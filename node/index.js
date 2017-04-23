@@ -4,12 +4,13 @@ let express = require('express');
 let fs = require('fs');
 let jsonfile = require('jsonfile');
 let parser = require('body-parser');
+let path = require('path');
 
 let app = express();
 app.use(parser.json());
 
 let config = {};
-let file = 'config.json';
+let file = path.resolve(__dirname, 'config.json');
 
 //Load or create the configuration file
 try {

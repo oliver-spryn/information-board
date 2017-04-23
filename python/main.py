@@ -4,35 +4,56 @@ import datetime
 import Image
 import ImageDraw
 import ImageFont
+import json
 import os
 from rgbmatrix import Adafruit_RGBmatrix
 import time
 
-# Config
-onHour = 8
-onMinute = 0
-
-offHour = 22
-offMinute = 0
+# Configuration
+height = 32
+width = 128
 
 # Set up the matrix
-m = Adafruit_RGBmatrix(32, 1)
+m = Adafruit_RGBmatrix(32, 4)
 
 # Set up the font
-f = ImageFont.load(os.path.dirname(os.path.realpath(__file__)) + "/helvR08.pil")
-fontYoffset = -2  # Scoot up a couple lines so descenders aren't cropped
-image       = Image.new("RGB", (32, 32))
+f = ImageFont.load(os.path.dirname(os.path.realpath(__file__)) + "/helvR14-ISO8859-1.pil")
+image       = Image.new("RGB", (width, height))
 draw        = ImageDraw.Draw(image)
-noTimesColor   = (  0,   0, 255) # No predictions = blue
+textColor   = (128, 128, 128)
+
+# Set up the file reader
+allowedToRead = False
+shouldReadSecond = 10
+
+def loadJson():
+	with open(os.path.dirname(os.path.realpath(__file__)) + "/../node/config.json") as dataFile:
+		return json.load(dataFile)
+
+config = loadJson()
+textColor = (config["common"]["red"], config["common"]["green"], config["common"]["blue"])
 
 while(True):
 	now = datetime.datetime.now()
-	draw.rectangle((0, 0, 32, 32), fill=(0, 0, 0))
+	hour = now.hour % 12
+	hour = 12 if (hour == 0) else hour
+	timeStr = "{0}:{1}".format(hour, now.strftime("%M"))
 
-	if(now.hour >= onHour and now.hour < offHour):
-		if((now.hour >= 10 and now.hour <= 12) or (now.hour >= 22 and now.hour <= 23)):
-			draw.text((4, 4 + fontYoffset + 8), "{0}:{1}".format(now.hour % 12, now.strftime("%M")), font=f, fill=noTimesColor)
-		else:
-			draw.text((1, 4 + fontYoffset + 8), "{0}:{1}:{2}".format(now.hour % 12, now.strftime("%M"), now.strftime("%S")), font=f, fill=noTimesColor)
+	if(now.second % 10 == 0 and allowedToRead):
+		config = loadJson()
+		textColor = (config["common"]["red"], config["common"]["green"], config["common"]["blue"])
+		allowedToRead = False
 
+	if(now.second % 10 != 0):
+		allowedToRead = True
+
+	size = f.getsize(timeStr)
+	textHeight = size[1]
+	textWidth = size[0]
+	xText = (width / 2) - (textWidth / 2)
+	yText = (height / 2) - (textHeight / 2)
+
+	draw.rectangle((0, 0, width, height), fill=(0, 0, 0))
+	draw.text((0, 0), timeStr, font=f, fill=textColor)
+	
 	m.SetImage(image.im.id, 0, 0)
