@@ -6,7 +6,7 @@ import ImageDraw
 import ImageFont
 import json
 import os
-from rgbmatrix import Adafruit_RGBmatrix
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import time
 
 # Configuration
@@ -14,7 +14,12 @@ height = 32
 width = 128
 
 # Set up the matrix
-m = Adafruit_RGBmatrix(32, 4)
+options = RGBMatrixOptions()
+options.rows = 32
+options.chain_length = 4
+options.hardware_mapping = 'adafruit-hat-pwm'
+
+m = RGBMatrix(options = options)
 
 # Set up the font
 f = ImageFont.load(os.path.dirname(os.path.realpath(__file__)) + "/helvR14-ISO8859-1.pil")
@@ -33,27 +38,28 @@ def loadJson():
 config = loadJson()
 textColor = (config["common"]["red"], config["common"]["green"], config["common"]["blue"])
 
-while(True):
+
+while True:
 	now = datetime.datetime.now()
 	hour = now.hour % 12
 	hour = 12 if (hour == 0) else hour
 	timeStr = "{0}:{1}".format(hour, now.strftime("%M"))
-
+	
 	if(now.second % 10 == 0 and allowedToRead):
 		config = loadJson()
 		textColor = (config["common"]["red"], config["common"]["green"], config["common"]["blue"])
 		allowedToRead = False
-
+	
 	if(now.second % 10 != 0):
 		allowedToRead = True
-
+	
 	size = f.getsize(timeStr)
 	textHeight = size[1]
 	textWidth = size[0]
 	xText = (width / 2) - (textWidth / 2)
 	yText = (height / 2) - (textHeight / 2)
-
+	
 	draw.rectangle((0, 0, width, height), fill=(0, 0, 0))
 	draw.text((0, 0), timeStr, font=f, fill=textColor)
-	
-	m.SetImage(image.im.id, 0, 0)
+
+	m.SetImage(image)
